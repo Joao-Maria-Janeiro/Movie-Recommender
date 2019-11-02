@@ -11,62 +11,11 @@ pip install -r requirements.txt
 ## Objective
 Our main objective is, given a movie title, check our dataset and see the top 5 most similar movies.
 
-This similarity can be of various types, it could be rating similarity, content similarity or even collaborative filtering.
-
-#### Rating similarity
-This is a rating or popularity based recommendation, based on views, likes, comments, ratings, reviews etc... This is what you get when you go to the trends.
-
-#### Content similarity
-This is what we are going to build today. So this similarity is based on the plot, title, cast, genre, etc... The movie's content. So we give it a movie title as input and based on it's content it will try to match it with the most similar to it, by ranking them.
-
-#### Collaborative filtering
-This is when you have two users, user A and user B, and both watched a movie, so you recommend user A some movies that user B has watched and vice versa.
-![](https://i0.wp.com/datameetsmedia.com/wp-content/uploads/2018/05/2ebah6c.png?resize=1024%2C627)
-
-Ok so let's see how to go about developing our content based recommendation system.
+Ok so let's see how I went about developing our content based recommendation system.
 
 First, we are going to do a recommender based on similarity, so we need to define similarity.
 
-There are a few text similarity methods but we'll look at the most common, Jaccard Similarity and Cosine Similarity.
-
-##### Jacard Similarity
-Jacard similarity is defined as the size of the intersection over size of the union of both sets.
-Example(taken from towardsdatascience):
-Sentence 1: AI is our friend and it has been friendly
-Sentence 2: AI and humans have always been friendly
-
-In order to calculate the similarity using the Jacard method, first we perform lemmeatization to get all to the words to their root word. Like "friend" and "friendly" will both become "friend".
-Let's look at the Venn diagram(taken from towardsdatascience):
-![](https://miro.medium.com/max/602/1*u2ZZPh5er5YbmOg7k-s0-A.png)
-
-So for this internsection we get a Jaccard Similarity of 5/(5+3+2) = 0.5, which is the intersection size of the total amount of words.
-
-##### Cosine Similarity
-Cosine Similarity is calculated by measuring the cosine of angle between two vectors. This is calculated with:
-![](https://miro.medium.com/max/554/1*hub04IikybZIBkSEcEOtGA.png)
-
-You might be wondering of to convert a sentence to a vector. One way is to use a bag of words with either TF (term frequency) or TF-IDF (term frequency - inverse document frequency). Another way is Word2Vec.
-
-Let’s calculate cosine similarity for these two sentences:
-Sentence 1: AI is our friend and it has been friendly
-Sentence 2: AI and humans have always been friendly
-
-**First**, we get the Term Frequeccy using a bag of words:
-
-| Sentence | AI | IS | FRIEND | HUMAN | ALWAYS | AND | BEEN | OUR | IT | HAS |
-|----------|:---|:---|:-------|-------|--------|-----|------|-----|----|----:|
-| Sentece 1| 1 | 1 | 2 | 0 | 0 | 1 | 1 | 1 | 1 | 1 |
-| Sentece 2| 1 | 0 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 |
-
-**Second**, knowing that the main issue with term frequency vounts is that it favours the longer sentences. In order to solve this we must normalize the frequencies, with the respective magnitudes. Summing up squares of each frequency and taking a square root.
-
-**Third**, as we already have the nomralized the two vectors to have a length of 1 we can calculate the cosine similarity by using the dot product.
-
-##### Differences between methods
-* Jaccard similarity takes only unique set of words for each sentence while cosine similarity takes total length of the vectors.
-* Jaccard similarity is good for cases where duplication does not matter, cosine similarity is good for cases where duplication matters while analyzing text similarity.
-
-We will use cosine similarity.
+There are a few text similarity methods but in this one we will use Cosine Similarity.
 
 ## The dataset
 Looking online I found two viable options:
@@ -120,3 +69,6 @@ First they'd be much better if the dataset was bigger and there were more movies
 We could also do a different approach using Neural Networks that might find some different relations between the movies.
 
 It's also worth considering looking into collaborative filtering, although a different dataset would be needed for that.
+
+## The full story
+You can read the full blog post that's more in depth [here](https://joao-maria-janeiro.github.io/movie-recommender.html)
